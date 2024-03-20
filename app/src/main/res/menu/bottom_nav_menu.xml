@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/person"
+        android:title="Profile"
+        android:icon="@drawable/ic_person_foreground"/>
+    <item
+        android:id="@+id/news"
+        android:title="News"
+        android:icon="@drawable/ic_news_foreground"/>
+</menu>

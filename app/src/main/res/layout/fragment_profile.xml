@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <TextView
+        android:id="@+id/tvProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Профиль"
+        android:fontFamily="@font/lexendeca"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:padding="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <!--ФИО-->
+    <TextView
+        android:id="@+id/tvPI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ФИО"
+        android:fontFamily="@font/lexendeca"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:paddingStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvBoxFIO"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/custom_text_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPI"
+        />
+
+    <ImageView
+        android:id="@+id/iconProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_account_circle_24"
+        app:layout_constraintTop_toTopOf="@id/tvBoxFIO"
+        app:layout_constraintStart_toStartOf="@id/tvBoxFIO"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        />
+    <TextView
+        android:id="@+id/tvFIO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ФИО"
+        android:fontFamily="@font/lexendeca"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/iconProfile"
+        app:layout_constraintTop_toTopOf="@id/tvBoxFIO"
+        app:layout_constraintBottom_toBottomOf="@id/iconProfile"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tvFIOInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Иванов Иван Иванович"
+        android:textSize="16dp"
+        android:fontFamily="@font/lexendeca"
+
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tvFIO"
+        app:layout_constraintTop_toBottomOf="@id/tvFIO"
+        android:paddingStart="10dp"
+        />
+
+    <!--Контакты-->
+    <TextView
+        android:id="@+id/tvContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Контакты"
+        android:fontFamily="@font/lexendeca"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:paddingTop="20dp"
+        android:paddingStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvBoxFIO"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <!--Email-->
+    <TextView
+        android:id="@+id/tvBoxEmail"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/custom_text_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvContacts"
+        />
+
+    <ImageView
+        android:id="@+id/iconEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_mail_outline_24"
+        app:layout_constraintStart_toStartOf="@id/tvBoxEmail"
+        app:layout_constraintTop_toTopOf="@id/tvBoxEmail"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:fontFamily="@font/lexendeca"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toEndOf="@id/iconEmail"
+        app:layout_constraintTop_toTopOf="@id/tvBoxEmail"
+        app:layout_constraintBottom_toBottomOf="@id/iconEmail"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tvEmailInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testmail@gmail.com"
+        android:fontFamily="@font/lexendeca"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        app:layout_constraintStart_toStartOf="@id/tvEmail"
+        />
+
+
+    <!--Номер телефона-->
+    <TextView
+        android:id="@+id/tvBoxPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/custom_text_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBoxEmail"
+        />
+
+    <ImageView
+        android:id="@+id/iconPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_local_phone_24"
+        app:layout_constraintStart_toStartOf="@id/tvBoxPhoneNumber"
+        app:layout_constraintTop_toTopOf="@id/tvBoxPhoneNumber"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Номер телефона"
+        android:fontFamily="@font/lexendeca"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toEndOf="@id/iconPhoneNumber"
+        app:layout_constraintTop_toTopOf="@id/tvBoxPhoneNumber"
+        app:layout_constraintBottom_toBottomOf="@id/iconPhoneNumber"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tvPhoneNumberInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+79XXXXXXXXX"
+        android:fontFamily="@font/lexendeca"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber"
+        app:layout_constraintStart_toStartOf="@id/tvPhoneNumber"
+        />
+    <!--Телеграм аккаунт-->
+    <TextView
+        android:id="@+id/tvBoxTg"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/custom_text_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBoxPhoneNumber"
+        />
+
+    <ImageView
+        android:id="@+id/iconTg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/telegram_logo_svgrepo_com"
+        app:layout_constraintStart_toStartOf="@id/tvBoxTg"
+        app:layout_constraintTop_toTopOf="@id/tvBoxTg"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tvTg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telegram"
+        android:fontFamily="@font/lexendeca"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toEndOf="@id/iconTg"
+        app:layout_constraintTop_toTopOf="@id/tvBoxTg"
+        app:layout_constraintBottom_toBottomOf="@id/iconTg"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tvTgInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\@test_tg"
+        android:fontFamily="@font/lexendeca"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTg"
+        app:layout_constraintStart_toStartOf="@id/tvTg"
+        />
+    <!--Справки-->
+    <TextView
+        android:id="@+id/tvCertificates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Справки"
+        android:fontFamily="@font/lexendeca"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:paddingTop="20dp"
+        android:paddingStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvBoxTg"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <!--Флюорография-->
+    <TextView
+        android:id="@+id/tvBoxFluCert"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/custom_text_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCertificates"
+        />
+
+    <ImageView
+        android:id="@+id/iconFluCert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lungs_svgrepo_com__1_"
+        app:layout_constraintStart_toStartOf="@id/tvBoxFluCert"
+        app:layout_constraintTop_toTopOf="@id/tvBoxFluCert"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tvFluCert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Флюорография"
+        android:fontFamily="@font/lexendeca"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toEndOf="@id/iconFluCert"
+        app:layout_constraintTop_toTopOf="@id/tvBoxFluCert"
+        app:layout_constraintBottom_toBottomOf="@id/iconFluCert"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tvFluCertInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Осталось N дней"
+        android:fontFamily="@font/lexendeca"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFluCert"
+        app:layout_constraintStart_toStartOf="@id/tvFluCert"
+        />
+    <!--ЗППП-->
+    <TextView
+        android:id="@+id/tvBoxSTDsCert"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/custom_text_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBoxFluCert"
+        />
+
+    <ImageView
+        android:id="@+id/iconSTDsCert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flowers_svgrepo_com"
+        app:layout_constraintStart_toStartOf="@id/tvBoxSTDsCert"
+        app:layout_constraintTop_toTopOf="@id/tvBoxSTDsCert"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tvSTDsCert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ЗППП"
+        android:fontFamily="@font/lexendeca"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toEndOf="@id/iconSTDsCert"
+        app:layout_constraintTop_toTopOf="@id/tvBoxSTDsCert"
+        app:layout_constraintBottom_toBottomOf="@id/iconSTDsCert"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tvSTDsCertInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Осталось N дней"
+        android:fontFamily="@font/lexendeca"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSTDsCert"
+        app:layout_constraintStart_toStartOf="@id/tvSTDsCert"
+        />
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:src="@drawable/hamburger_menu_dots_svgrepo_com"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        android:paddingTop="10dp"-->
+    <!--        android:paddingEnd="10dp"-->
+    <!--        />-->
+    <!--Change password-->
+
+    <!--Exit button-->
+</androidx.constraintlayout.widget.ConstraintLayout>
+
