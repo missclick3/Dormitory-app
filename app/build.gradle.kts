@@ -79,6 +79,7 @@ dependencies {
     ksp("com.google.dagger:hilt-compiler:$hilt_version")
     //retrofit & okHttp
     implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
     implementation(libs.okhttp)
 
 

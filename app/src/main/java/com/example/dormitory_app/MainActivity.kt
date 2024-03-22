@@ -21,5 +21,4 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_profile)
     }
-
 }
