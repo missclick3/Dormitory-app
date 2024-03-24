@@ -23,7 +23,9 @@ class LoginViewModel @Inject constructor(
     var state by mutableStateOf(AuthState())
     private val resultChanel = Channel<AuthResult<Unit>>()
     val authResults = resultChanel.receiveAsFlow()
-
+    init{
+        authenticate()
+    }
     fun onEvent(event: AuthUIEvent) {
         when(event) {
             is AuthUIEvent.SignInUsernameChanged -> {
