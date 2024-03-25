@@ -142,7 +142,17 @@
         android:paddingTop="5dp"
         />
 
-    <TextView
+    <ImageView
+        android:id="@+id/editEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_edit_24"
+        app:layout_constraintTop_toTopOf="@id/tvBoxEmail"
+        app:layout_constraintEnd_toEndOf="@id/tvBoxEmail"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"/>
+
+    <EditText
         android:id="@+id/tvEmailInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -151,6 +161,7 @@
         android:textColor="@color/black"
         android:textSize="16dp"
         android:paddingStart="10dp"
+        android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@id/tvEmail"
         app:layout_constraintStart_toStartOf="@id/tvEmail"
         />
@@ -197,7 +208,17 @@
         android:paddingTop="5dp"
         />
 
-    <TextView
+    <ImageView
+        android:id="@+id/editPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_edit_24"
+        app:layout_constraintTop_toTopOf="@id/tvBoxPhoneNumber"
+        app:layout_constraintEnd_toEndOf="@id/tvBoxPhoneNumber"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"/>
+
+    <EditText
         android:id="@+id/tvPhoneNumberInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -206,6 +227,7 @@
         android:textColor="@color/black"
         android:textSize="16dp"
         android:paddingStart="10dp"
+        android:inputType="phone"
         app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber"
         app:layout_constraintStart_toStartOf="@id/tvPhoneNumber"
         />
@@ -250,7 +272,17 @@
         android:paddingTop="5dp"
         />
 
-    <TextView
+    <ImageView
+        android:id="@+id/editTg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_edit_24"
+        app:layout_constraintTop_toTopOf="@id/tvBoxTg"
+        app:layout_constraintEnd_toEndOf="@id/tvBoxTg"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"/>
+
+    <EditText
         android:id="@+id/tvTgInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -259,6 +291,7 @@
         android:textColor="@color/black"
         android:textSize="16dp"
         android:paddingStart="10dp"
+        android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@id/tvTg"
         app:layout_constraintStart_toStartOf="@id/tvTg"
         />
