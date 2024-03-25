@@ -1,6 +1,7 @@
 package com.example.dormitory_app.feature_login.data.repositories
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.dormitory_app.feature_login.data.messages.AuthRequest
 import com.example.dormitory_app.feature_login.data.remote.api.LoginApi
 import com.example.dormitory_app.feature_login.domain.AuthResult
@@ -26,9 +27,11 @@ class LoginRepositoryImpl (
                 AuthResult.WrongFields()
             }
             else {
+                Log.i("asdf", e.code().toString())
                 AuthResult.UnknownError()
             }
         } catch (e: Exception) {
+            Log.i("HEEEEEEEEEREEEEEEEEEE", e.toString())
             AuthResult.UnknownError()
         }
     }

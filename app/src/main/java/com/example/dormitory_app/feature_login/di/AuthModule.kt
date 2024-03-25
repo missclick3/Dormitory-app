@@ -9,10 +9,14 @@ import com.example.dormitory_app.feature_login.domain.repositories.LoginReposito
 import com.example.dormitory_app.feature_login.domain.usecases.AuthUseCases
 import com.example.dormitory_app.feature_login.domain.usecases.AuthenticateUseCase
 import com.example.dormitory_app.feature_login.domain.usecases.LoginUseCase
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
@@ -25,9 +29,12 @@ object AuthModule {
     @Provides
     @Singleton
     fun provideLoginApi(): LoginApi {
+        val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("http://192.168.192.1:8085/")
-            .addConverterFactory(MoshiConverterFactory.create())
+            .baseUrl("http://192.168.187.207:8085/")
+            .addConverterFactory(Json {
+                ignoreUnknownKeys = true
+            }.asConverterFactory(contentType))
             .build()
             .create()
     }
