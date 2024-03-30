@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".main.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/tvProfile"
         android:layout_width="wrap_content"
