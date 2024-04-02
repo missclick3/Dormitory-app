@@ -9,6 +9,7 @@ import com.example.dormitory_app.feature_profile.data.repositories.ProfileReposi
 import com.example.dormitory_app.feature_profile.domain.repositories.ProfileRepository
 import com.example.dormitory_app.feature_profile.domain.usecases.AuthenticateUseCase
 import com.example.dormitory_app.feature_profile.domain.usecases.GetUserInfoUseCase
+import com.example.dormitory_app.feature_profile.domain.usecases.LogoutUseCase
 import com.example.dormitory_app.feature_profile.domain.usecases.PatchFieldUseCase
 import com.example.dormitory_app.feature_profile.domain.usecases.ProfileUseCases
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -50,7 +51,8 @@ object ProfileModule {
         return ProfileUseCases(
             getUserInfoUseCase = GetUserInfoUseCase(repository),
             patchFieldUseCase = PatchFieldUseCase(repository),
-            authenticateUseCase = AuthenticateUseCase(repository)
+            authenticateUseCase = AuthenticateUseCase(repository),
+            logoutUseCase = LogoutUseCase(repository)
         )
     }
 }

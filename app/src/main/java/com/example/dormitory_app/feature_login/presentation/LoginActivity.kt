@@ -38,8 +38,7 @@ class LoginActivity : AppCompatActivity() {
             viewModel.authResults.collect { result ->
                 when(result) {
                     is AuthResult.Authorized -> {
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
                     is AuthResult.Unauthorized -> Toast.makeText(this@LoginActivity, "Вы не авторизованы", Toast.LENGTH_LONG).show()

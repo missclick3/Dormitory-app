@@ -9,7 +9,9 @@ import retrofit2.http.PATCH
 
 interface UserApi {
     @GET("/user")
-    suspend fun getUser() : UserInfoResponse
+    suspend fun getUser(
+        @Header("Authorization") token: String
+    ) : UserInfoResponse
 
     @PATCH("/user")
     suspend fun patchUser(@Body request: PatchUserPersonalInfoRequest)

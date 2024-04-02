@@ -1,5 +1,6 @@
 package com.example.dormitory_app.feature_profile.presentation
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -22,14 +23,8 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel(){
     var state by mutableStateOf(ProfileState())
 
-    private val authResultChannel = Channel<AuthResult<Unit>>()
-    val authResult = authResultChannel.receiveAsFlow()
-
-    private val profileResultChannel = Channel<ProfileResult<Unit>>()
-    val profileResult = profileResultChannel.receiveAsFlow()
-
-    private val getUserChannel = Channel<ProfileResult<UserInfoResponse?>>()
-    val getUserResult = getUserChannel.receiveAsFlow()
+    private val resultChannel = Channel<ProfileResult<UserInfoResponse?>>()
+    val profileResult = resultChannel.receiveAsFlow()
     init {
         authenticate()
     }
@@ -56,27 +51,40 @@ class ProfileViewModel @Inject constructor(
             is ProfileUIEvent.GetUserInfo -> {
                 getUserInfo()
             }
+
+            ProfileUIEvent.Logout -> {
+                logout()
+                authenticate()
+            }
         }
     }
-
+    private fun logout() {
+        viewModelScope.launch {
+            val result = useCases.logoutUseCase.execute()
+            resultChannel.send(result)
+        }
+    }
     private fun authenticate() {
         viewModelScope.launch {
             val result = useCases.authenticateUseCase.execute()
-            authResultChannel.send(result)
+            resultChannel.send(result)
+            if (result.data == null) {
+                Log.println(Log.DEBUG, "WTFFFFFF", "I AM HERE")
+            }
         }
     }
 
     private fun changeFields(request: PatchUserPersonalInfoRequest) {
         viewModelScope.launch {
             val result = useCases.patchFieldUseCase.execute(request)
-            profileResultChannel.send(result)
+            resultChannel.send(result)
         }
     }
 
     private fun getUserInfo() {
         viewModelScope.launch {
             val result = useCases.getUserInfoUseCase.execute()
-            getUserChannel.send(result)
+            resultChannel.send(result)
         }
     }
 }

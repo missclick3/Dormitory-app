@@ -1,6 +1,7 @@
 package com.example.dormitory_app.feature_profile.data.repositories
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.dormitory_app.feature_login.domain.AuthResult
 import com.example.dormitory_app.feature_profile.data.messages.requests.PatchUserPersonalInfoRequest
 import com.example.dormitory_app.feature_profile.data.messages.responses.UserInfoResponse
@@ -15,7 +16,8 @@ class ProfileRepositoryImpl(
 ) : ProfileRepository{
     override suspend fun getUser(): ProfileResult<UserInfoResponse?> {
         return try {
-            val response = userApi.getUser()
+            val token = prefs.getString("jwt", null) ?: return ProfileResult.Unauthorized()
+            val response = userApi.getUser("Bearer $token")
             ProfileResult.Success(response)
         } catch (e: HttpException) {
             if (e.code() == 401) {
@@ -29,10 +31,10 @@ class ProfileRepositoryImpl(
         }
     }
 
-    override suspend fun patchField(request: PatchUserPersonalInfoRequest): ProfileResult<Unit> {
+    override suspend fun patchField(request: PatchUserPersonalInfoRequest): ProfileResult<UserInfoResponse?> {
         return try {
             userApi.patchUser(request)
-            ProfileResult.Success()
+            ProfileResult.Success(null)
         } catch (e: HttpException) {
             if (e.code() == 401) {
                 ProfileResult.Unauthorized()
@@ -48,20 +50,31 @@ class ProfileRepositoryImpl(
         }
     }
 
-    override suspend fun authenticate(): AuthResult<Unit> {
+    override suspend fun authenticate(): ProfileResult<UserInfoResponse?> {
         return try {
-            val token = prefs.getString("jwt", null) ?: return AuthResult.Unauthorized()
+            val token = prefs.getString("jwt", null) ?: return ProfileResult.Unauthorized()
             userApi.authenticate("Bearer $token")
-            AuthResult.Authorized()
+            ProfileResult.Success()
         } catch (e: HttpException) {
             if (e.code() == 401){
-                AuthResult.Unauthorized()
+                Log.println(Log.DEBUG, "WTFFFFFFFF", "I am HERE")
+                ProfileResult.Unauthorized()
             }
             else {
-                AuthResult.UnknownError()
+                ProfileResult.UnknownError()
             }
         } catch (e: Exception) {
-            AuthResult.UnknownError()
+            ProfileResult.UnknownError()
+        }
+    }
+
+    override suspend fun logout() : ProfileResult<UserInfoResponse?> {
+        return try {
+            val token = prefs.getString("jwt", null) ?: return ProfileResult.Unauthorized()
+            prefs.edit().remove("jwt").commit()
+            ProfileResult.Success()
+        } catch (e: Exception) {
+            ProfileResult.UnknownError()
         }
     }
 

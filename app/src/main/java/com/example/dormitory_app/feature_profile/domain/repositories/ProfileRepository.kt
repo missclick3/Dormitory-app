@@ -7,6 +7,8 @@ import com.example.dormitory_app.feature_profile.domain.ProfileResult
 
 interface ProfileRepository {
     suspend fun getUser(): ProfileResult<UserInfoResponse?>
-    suspend fun patchField(request: PatchUserPersonalInfoRequest): ProfileResult<Unit>
-    suspend fun authenticate(): AuthResult<Unit>
+    suspend fun patchField(request: PatchUserPersonalInfoRequest): ProfileResult<UserInfoResponse?>
+    suspend fun authenticate(): ProfileResult<UserInfoResponse?>
+
+    suspend fun logout() : ProfileResult<UserInfoResponse?>
 }
