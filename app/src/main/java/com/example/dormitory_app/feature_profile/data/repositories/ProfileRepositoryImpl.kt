@@ -33,7 +33,8 @@ class ProfileRepositoryImpl(
 
     override suspend fun patchField(request: PatchUserPersonalInfoRequest): ProfileResult<UserInfoResponse?> {
         return try {
-            userApi.patchUser(request)
+            val token = prefs.getString("jwt", null) ?: return ProfileResult.Unauthorized()
+            userApi.patchUser("Bearer $token" ,request)
             ProfileResult.Success(null)
         } catch (e: HttpException) {
             if (e.code() == 401) {

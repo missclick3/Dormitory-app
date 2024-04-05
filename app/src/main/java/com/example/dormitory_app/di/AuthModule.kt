@@ -26,7 +26,7 @@ object AuthModule {
     fun provideLoginApi(): LoginApi {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("http://192.168.240.207:8085/")
+            .baseUrl("http://192.168.3.207:8085/")
             .addConverterFactory(Json {
                 ignoreUnknownKeys = true
             }.asConverterFactory(contentType))

@@ -124,7 +124,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvContacts"
+                app:layout_constraintBottom_toTopOf="@id/tvEmailStatus"
                 />
+
+            <TextView
+                android:id="@+id/tvEmailStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пожалуйста, введите действительный адрес электронной почты."
+                android:visibility="gone"
+                android:textSize="12sp"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintStart_toStartOf="@id/tvBoxEmail"
+                app:layout_constraintTop_toBottomOf="@id/tvBoxEmail"
+                app:layout_constraintBottom_toTopOf="@id/tvBoxPhoneNumber"/>
 
             <ImageView
                 android:id="@+id/iconEmail"
@@ -167,7 +180,8 @@
                 android:id="@+id/tvEmailInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="testmail@gmail.com"
+                android:hint="testmail@gmail.com"
+                android:enabled="false"
                 android:fontFamily="@font/lexendeca"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -191,9 +205,22 @@
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBoxEmail"
+                app:layout_constraintTop_toBottomOf="@id/tvEmailStatus"
+                app:layout_constraintBottom_toTopOf="@id/tvPhoneNumberStatus"
                 />
+            <TextView
+                android:id="@+id/tvPhoneNumberStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexendeca"
+                android:textSize="12sp"
+                android:text="Пожалуйста, введите действительный номер телефона."
+                android:visibility="gone"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintStart_toStartOf="@id/tvBoxPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvBoxPhoneNumber"
 
+                app:layout_constraintBottom_toTopOf="@id/tvBoxTg"/>
             <ImageView
                 android:id="@+id/iconPhoneNumber"
                 android:layout_width="wrap_content"
@@ -235,7 +262,8 @@
                 android:id="@+id/tvPhoneNumberInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+79XXXXXXXXX"
+                android:hint="+79XXXXXXXXX"
+                android:enabled="false"
                 android:fontFamily="@font/lexendeca"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -257,9 +285,19 @@
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBoxPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberStatus"
                 />
-
+            <TextView
+                android:id="@+id/tvTgStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пожалуйста, введите действительный логин telegram."
+                android:textSize="12sp"
+                android:textColor="@android:color/holo_red_light"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tvBoxTg"
+                app:layout_constraintStart_toStartOf="@id/tvBoxTg"
+                app:layout_constraintBottom_toTopOf="@id/tvCertificates"/>
             <ImageView
                 android:id="@+id/iconTg"
                 android:layout_width="wrap_content"
@@ -301,7 +339,8 @@
                 android:id="@+id/tvTgInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\@test_tg"
+                android:hint="\@test_tg"
+                android:enabled="false"
                 android:fontFamily="@font/lexendeca"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -324,7 +363,7 @@
                 android:textColor="@color/black"
                 android:paddingTop="20dp"
                 android:paddingStart="20dp"
-                app:layout_constraintTop_toBottomOf="@id/tvBoxTg"
+                app:layout_constraintTop_toBottomOf="@id/tvTgStatus"
                 app:layout_constraintStart_toStartOf="parent"
                 />
             <!--Флюорография-->

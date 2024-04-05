@@ -14,7 +14,10 @@ interface UserApi {
     ) : UserInfoResponse
 
     @PATCH("/user")
-    suspend fun patchUser(@Body request: PatchUserPersonalInfoRequest)
+    suspend fun patchUser(
+        @Header("Authorization") token: String,
+        @Body request: PatchUserPersonalInfoRequest
+    )
 
     @GET("/authenticate")
     suspend fun authenticate(

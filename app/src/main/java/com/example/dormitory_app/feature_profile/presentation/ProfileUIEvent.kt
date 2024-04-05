@@ -6,6 +6,5 @@ sealed class ProfileUIEvent {
     data class PhoneNumberValueChanged(val phoneNumberValue: String) : ProfileUIEvent()
     data object ApplyChanges : ProfileUIEvent()
     data object GetUserInfo : ProfileUIEvent()
-
     data object Logout : ProfileUIEvent()
 }

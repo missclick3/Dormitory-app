@@ -5,18 +5,28 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.dormitory_app.R
 import com.example.dormitory_app.databinding.FragmentProfileBinding
 import com.example.dormitory_app.feature_login.domain.AuthResult
+import com.example.dormitory_app.feature_login.presentation.AuthUIEvent
 import com.example.dormitory_app.feature_login.presentation.LoginActivity
 import com.example.dormitory_app.feature_profile.data.messages.dtos.CertificateDTO
 import com.example.dormitory_app.feature_profile.data.messages.dtos.UserDTO
@@ -56,6 +66,215 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.logout.setOnClickListener {
             showLogoutConformationDialog()
         }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setupUserInfo(userInfo: UserInfoResponse) {
+        val userDTO = userInfo.userDTO
+        val fluoroCertificateDTO = userInfo.fluoroCertificateDTO
+        val stdsCertificateDTO = userInfo.stdsCertificateDTO
+        setupStart()
+        setupFIO(userDTO)
+        setupCertificates(fluoroCertificateDTO, stdsCertificateDTO)
+        setupContacts(userDTO)
+        setupDormitory(userDTO)
+        setupChangesEmail()
+        setupChangesPhoneNumber()
+        setupChangesTgLogin()
+        setupEditButtons()
+        setupOkNextClicks()
+    }
+
+    private fun setupStart() {
+        binding.tvEmailInfo.isEnabled = false
+        binding.tvPhoneNumberInfo.isEnabled = false
+        binding.tvTgInfo.isEnabled = false
+        binding.editEmail.setImageResource(R.drawable.baseline_edit_24)
+        binding.editPhoneNumber.setImageResource(R.drawable.baseline_edit_24)
+        binding.editTg.setImageResource(R.drawable.baseline_edit_24)
+    }
+    private fun setupOkNextClicks() {
+        okNextClickEmail()
+        okNextClickPhoneNumber()
+        okNextClickTgLogin()
+    }
+
+    private fun okNextClickTgLogin() {
+        binding.tvTgInfo.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                binding.editTg.setImageResource(R.drawable.baseline_edit_24)
+                binding.tvTgInfo.isEnabled = false
+                viewModel.onEvent(ProfileUIEvent.ApplyChanges)
+                true
+            } else {
+                false
+            }
+        }
+    }
+    private fun okNextClickPhoneNumber() {
+        binding.tvPhoneNumberInfo.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                binding.editPhoneNumber.setImageResource(R.drawable.baseline_edit_24)
+                binding.tvPhoneNumberInfo.isEnabled = false
+                viewModel.onEvent(ProfileUIEvent.ApplyChanges)
+                true
+            } else {
+                false
+            }
+        }
+    }
+    private fun okNextClickEmail() {
+        binding.tvEmailInfo.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                binding.editEmail.setImageResource(R.drawable.baseline_edit_24)
+                binding.tvEmailInfo.isEnabled = false
+                viewModel.onEvent(ProfileUIEvent.ApplyChanges)
+                true
+            } else {
+                false
+            }
+        }
+    }
+    private fun setupEditButtons() {
+        setupEditEmailButton()
+        setupEditPhoneNumberButton()
+        setupEditTgLoginButton()
+    }
+
+    private fun setupEditTgLoginButton() {
+        binding.editTg.setOnClickListener {
+            if (!binding.tvTgInfo.isEnabled) {
+                if (binding.tvEmailInfo.isEnabled) {
+                    binding.editEmail.setImageResource(R.drawable.baseline_edit_24)
+                }
+                if (binding.tvPhoneNumberInfo.isEnabled) {
+                    binding.editPhoneNumber.setImageResource(R.drawable.baseline_edit_24)
+                }
+                binding.editTg.setImageResource(R.drawable.baseline_check_24)
+                binding.tvTgInfo.isEnabled = true
+                binding.tvTgInfo.requestFocus()
+                binding.tvTgInfo.setSelection(binding.tvTgInfo.text.length)
+                WindowCompat.getInsetsController(requireActivity().window, binding.tvTgInfo).show(WindowInsetsCompat.Type.ime())
+            }
+            else {
+                binding.editTg.setImageResource(R.drawable.baseline_edit_24)
+                binding.tvTgInfo.isEnabled = false
+                viewModel.onEvent(ProfileUIEvent.ApplyChanges)
+            }
+        }
+    }
+    private fun setupEditPhoneNumberButton() {
+        binding.editPhoneNumber.setOnClickListener {
+            if (!binding.tvPhoneNumberInfo.isEnabled) {
+                if (binding.tvEmailInfo.isEnabled) {
+                    binding.editEmail.setImageResource(R.drawable.baseline_edit_24)
+                }
+                if (binding.tvTgInfo.isEnabled) {
+                    binding.editTg.setImageResource(R.drawable.baseline_edit_24)
+                }
+                binding.editPhoneNumber.setImageResource(R.drawable.baseline_check_24)
+                binding.tvPhoneNumberInfo.isEnabled = true
+                binding.tvPhoneNumberInfo.requestFocus()
+                binding.tvPhoneNumberInfo.setSelection(binding.tvPhoneNumberInfo.text.length)
+                WindowCompat.getInsetsController(requireActivity().window, binding.tvPhoneNumberInfo).show(WindowInsetsCompat.Type.ime())
+            }
+            else {
+                binding.editPhoneNumber.setImageResource(R.drawable.baseline_edit_24)
+                binding.tvPhoneNumberInfo.isEnabled = false
+                viewModel.onEvent(ProfileUIEvent.ApplyChanges)
+            }
+        }
+    }
+    private fun setupEditEmailButton() {
+        binding.editEmail.setOnClickListener {
+            if (!binding.tvEmailInfo.isEnabled) {
+                if (binding.tvPhoneNumberInfo.isEnabled) {
+                    binding.editPhoneNumber.setImageResource(R.drawable.baseline_edit_24)
+                }
+                if (binding.tvTgInfo.isEnabled) {
+                    binding.editTg.setImageResource(R.drawable.baseline_edit_24)
+                }
+                binding.editEmail.setImageResource(R.drawable.baseline_check_24)
+                binding.tvEmailInfo.isEnabled = true
+                binding.tvEmailInfo.requestFocus()
+                binding.tvEmailInfo.setSelection(binding.tvEmailInfo.text.length)
+                WindowCompat.getInsetsController(requireActivity().window, binding.tvEmailInfo).show(WindowInsetsCompat.Type.ime())
+            }
+            else {
+                binding.editEmail.setImageResource(R.drawable.baseline_edit_24)
+                binding.tvEmailInfo.isEnabled = false
+                viewModel.onEvent(ProfileUIEvent.ApplyChanges)
+            }
+        }
+    }
+    private fun setupChangesTgLogin() {
+        binding.tvTgInfo.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.onEvent(ProfileUIEvent.TgValueChanged(s.toString()))
+                    if (!isTgLoginValid(s.toString())) {
+                        binding.tvTgStatus.visibility = View.VISIBLE
+                    } else {
+                        binding.tvTgStatus.visibility = View.GONE
+                    }
+                }
+            }
+        )
+    }
+    private fun isTgLoginValid(str: String) : Boolean {
+        return Regex("^@[a-zA-Z0-9_]{5,32}$").matches(str) || str.isBlank()
+    }
+    private fun setupChangesPhoneNumber() {
+        binding.tvPhoneNumberInfo.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.onEvent(ProfileUIEvent.PhoneNumberValueChanged(s.toString()))
+                    if (!isPhoneNumber(s.toString())) {
+                        binding.tvPhoneNumberStatus.visibility = View.VISIBLE
+                    } else {
+                        binding.tvPhoneNumberStatus.visibility = View.GONE
+                    }
+                }
+            }
+        )
+    }
+
+    private fun isPhoneNumber(str: String) : Boolean {
+        return Regex("^\\+7\\d{10}$").matches(str) || str.isBlank()
+    }
+    private fun setupChangesEmail() {
+        binding.tvEmailInfo.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.onEvent(ProfileUIEvent.EmailValueChanged(s.toString()))
+                    if (!isEmail(s.toString())) {
+                        binding.tvEmailStatus.visibility = View.VISIBLE
+                    } else {
+                        binding.tvEmailStatus.visibility = View.GONE
+                    }
+                }
+            }
+        )
+    }
+    private fun isEmail(str: String) : Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(str).matches() || str.isBlank()
     }
     private fun setupSwipe() {
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -130,16 +349,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.tvPhoneNumberInfo.setText(userDTO.phoneNumber)
         binding.tvTgInfo.setText(userDTO.tgUsername)
     }
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setupUserInfo(userInfo: UserInfoResponse) {
-        val userDTO = userInfo.userDTO
-        val fluoroCertificateDTO = userInfo.fluoroCertificateDTO
-        val stdsCertificateDTO = userInfo.stdsCertificateDTO
-        setupFIO(userDTO)
-        setupCertificates(fluoroCertificateDTO, stdsCertificateDTO)
-        setupContacts(userDTO)
-        setupDormitory(userDTO)
-    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupChannelResults() {
         CoroutineScope(Dispatchers.Main).launch {
@@ -152,6 +362,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         }
                         if (result.data != null) {
                             val userInfo = result.data
+                            viewModel.state = viewModel.state.copy(
+                                emailField = userInfo.userDTO.email,
+                                phoneNumberField = userInfo.userDTO.phoneNumber,
+                                tgField = userInfo.userDTO.tgUsername,
+                            )
                             setupUserInfo(userInfo)
 //                            Toast.makeText(activity, "Здарова ${userInfo.userDTO.name}", Toast.LENGTH_SHORT).show()
                             Log.println(Log.DEBUG, "WTFFFFFFFFFF", " ${userInfo.userDTO.name}")
@@ -167,6 +382,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         Toast.makeText(activity, "Что-то пошло не так", Toast.LENGTH_LONG).show()
                     }
                     is ProfileResult.WrongFields -> {
+                        getUser()
                         Toast.makeText(activity, "Некорректное поле", Toast.LENGTH_LONG).show()
                     }
                 }
