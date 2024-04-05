@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,14 +43,24 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
-                    is AuthResult.Unauthorized -> Toast.makeText(this@LoginActivity, "Вы не авторизованы", Toast.LENGTH_LONG).show()
-                    is AuthResult.UnknownError -> Toast.makeText(this@LoginActivity, "Unknown error", Toast.LENGTH_LONG).show()
+                    is AuthResult.Unauthorized -> {
+                        configureLayout()
+                        Toast.makeText(this@LoginActivity, "Вы не авторизованы", Toast.LENGTH_LONG).show()
+                    }
+                    is AuthResult.UnknownError -> {
+                        configureLayout()
+                        Toast.makeText(this@LoginActivity, "Unknown error", Toast.LENGTH_LONG).show()
+                    }
                     is AuthResult.WrongFields -> {
+                        configureLayout()
                         Toast.makeText(this@LoginActivity, "Неправильный логин или пароль", Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
+    }
+
+    private fun configureLayout() {
         binding.password.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -69,14 +81,11 @@ class LoginActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 viewModel.onEvent(AuthUIEvent.SignInUsernameChanged(s.toString()))
-
             }
         })
 
         binding.loginButton.setOnClickListener {
             viewModel.onEvent(AuthUIEvent.SignIn)
-            //Toast.makeText(this@LoginActivity, "ТЫК", Toast.LENGTH_LONG).show()
         }
-
     }
 }

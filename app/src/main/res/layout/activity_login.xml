@@ -33,31 +33,57 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/lexendeca"
                 android:textColor="@color/black"/>
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/username"
-                android:background="@drawable/custom_edit_text"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:padding="8dp"
-                android:hint="Логин"
-                android:drawableLeft="@drawable/baseline_account_circle_24"
-                android:textColor="@color/black"
-                android:fontFamily="@font/lexendeca"
-                android:drawablePadding="8dp"/>
-            <EditText
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/baseline_account_circle_24"
+                app:startIconTint="@color/blue"
+                app:hintEnabled="false"
+                app:boxBackgroundMode="none">
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:fontFamily="@font/lexendeca"
+                    android:hint="Логин"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/password"
-                android:background="@drawable/custom_edit_text"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:hint="Пароль"
-                android:drawableLeft="@drawable/rounded_encrypted_24"
-                android:textColor="@color/black"
-                android:fontFamily="@font/lexendeca"
-                android:drawablePadding="8dp"/>
+                android:id="@+id/passwordTextInputLayout"
+                app:hintTextColor="@color/black"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/blue"
+                app:startIconDrawable="@drawable/rounded_encrypted_24"
+                app:startIconTint="@color/blue"
+                app:hintEnabled="false"
+                app:boxBackgroundMode="none">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/password"
+                    android:hint="Пароль"
+                    android:textSize="20sp"
+                    android:background="@drawable/custom_edit_text"
+                    android:inputType="textPassword"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/lexendeca"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
