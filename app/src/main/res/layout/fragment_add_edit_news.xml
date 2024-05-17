@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvAddEditHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:text="Добавить публикацию"
+        android:textStyle="bold"
+        android:padding="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvEditTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAddEditHeader"
+        android:text="Заголовок"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="4dp"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="16sp"
+        android:paddingStart="8dp"
+        android:layout_marginHorizontal="12dp"
+        android:gravity="top|left"
+        android:hint="Введите заголовок..."
+        android:background="@drawable/edit_text_for_admin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEditTitle"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvEditContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTitle"
+        android:text="Текст публикации"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="4dp"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/etContent"
+
+        android:paddingStart="8dp"
+        android:hint="Введите текст..."
+        android:layout_marginHorizontal="12dp"
+        android:gravity="top|left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEditContent"
+        app:layout_constraintBottom_toTopOf="@id/tvAddImages"
+        android:background="@drawable/edit_text_for_admin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="180dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAddImages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline2"
+        android:text="Добавьте изображения"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <ImageButton
+        android:id="@+id/btnAddImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAddImages"
+        android:src="@drawable/baseline_add_40"
+        android:layout_margin="4dp"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/imagesToAddLL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:layout_margin="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAddImages"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAddFiles"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:text="Добавьте файлы"
+        android:textColor="@color/black"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="60dp"/>
+    <ImageButton
+        android:id="@+id/btnAddFiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline1"
+        android:src="@drawable/baseline_add_40"
+        android:layout_margin="4dp"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/filesToAddLL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:layout_margin="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline1"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

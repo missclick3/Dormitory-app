@@ -1,8 +1,8 @@
 package com.example.dormitory_app.feature_news.util
 
-import com.example.dormitory_app.feature_news.data.messages.dtos.NewsDto
-import com.example.dormitory_app.feature_news.data.messages.responses.GetNewsResponse
-import com.example.dormitory_app.feature_news.data.messages.responses.GetSavedNewsResponse
+import com.example.dormitory_app.feature_news.messages.dtos.NewsDto
+import com.example.dormitory_app.feature_news.messages.responses.GetNewsResponse
+import com.example.dormitory_app.feature_news.messages.responses.GetSavedNewsResponse
 
 data class WrappedResponse(
     val unitResponse: Unit? = null,

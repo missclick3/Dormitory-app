@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyWmInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Стиральная машина №"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <Button
+            android:id="@+id/btnCancelBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:text="отменить"
+            app:cornerRadius="30dp"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyWmValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvMyWmInfo"
+            android:text="1"
+            android:textSize="16sp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyTimeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMyWmInfo"
+            android:text="Время: "
+            android:textSize="16sp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyTimeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tvMyTimeInfo"
+            app:layout_constraintStart_toEndOf="@id/tvMyTimeInfo"
+            android:textSize="16sp"
+            android:text="08:00-09:45"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyStatusInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMyTimeInfo"
+            android:text="Статус: "
+            android:textSize="16sp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyStatusValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tvMyStatusInfo"
+            app:layout_constraintTop_toTopOf="@id/tvMyStatusInfo"
+            android:text="активна"
+            android:textSize="16sp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyDrierInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMyStatusInfo"
+            android:text="С сушилкой: "
+            android:textSize="16sp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMyDrierValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tvMyDrierInfo"
+            app:layout_constraintTop_toTopOf="@id/tvMyDrierInfo"
+            android:text="да"
+            android:textSize="16sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

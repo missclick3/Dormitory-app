@@ -31,7 +31,7 @@ object ProfileModule {
     fun provideUserApi(): UserApi {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("http://192.168.3.207:8085/")
+            .baseUrl("http://192.168.26.207:8070/")
             .addConverterFactory(Json {
                 ignoreUnknownKeys = true
             }.asConverterFactory(contentType))

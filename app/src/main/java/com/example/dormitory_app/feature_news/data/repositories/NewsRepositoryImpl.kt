@@ -1,22 +1,26 @@
 package com.example.dormitory_app.feature_news.data.repositories
 
 import android.content.SharedPreferences
-import com.example.dormitory_app.feature_news.data.messages.dtos.NewsDto
-import com.example.dormitory_app.feature_news.data.messages.requests.CreateNewsRequest
-import com.example.dormitory_app.feature_news.data.messages.requests.UpdateNewsRequest
-import com.example.dormitory_app.feature_news.data.messages.responses.GetNewsResponse
-import com.example.dormitory_app.feature_news.data.messages.responses.GetSavedNewsResponse
-import com.example.dormitory_app.feature_news.data.messages.util.NewsCategory
-import com.example.dormitory_app.feature_news.data.messages.util.SortType
+import android.util.Log
+import com.example.dormitory_app.feature_news.messages.dtos.NewsDto
+import com.example.dormitory_app.feature_news.messages.requests.CreateNewsRequest
+import com.example.dormitory_app.feature_news.messages.requests.UpdateNewsRequest
+import com.example.dormitory_app.feature_news.messages.responses.GetNewsResponse
+import com.example.dormitory_app.feature_news.messages.responses.GetSavedNewsResponse
+import com.example.dormitory_app.feature_news.messages.util.NewsCategory
+import com.example.dormitory_app.feature_news.messages.util.SortType
 import com.example.dormitory_app.feature_news.data.remote.NewsApi
+import com.example.dormitory_app.feature_news.data.remote.SavedNewsApi
 import com.example.dormitory_app.feature_news.domain.NewsResult
 import com.example.dormitory_app.feature_news.domain.repositories.NewsRepository
+import com.example.dormitory_app.feature_news.messages.requests.SavedNewsRequest
 import com.example.dormitory_app.feature_news.util.WrappedResponse
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
     private val newsApi: NewsApi,
+    private val savedNewsApi: SavedNewsApi,
     private val prefs: SharedPreferences
 ) : NewsRepository{
     override suspend fun getNews(
@@ -27,6 +31,7 @@ class NewsRepositoryImpl @Inject constructor(
         return try {
             val token = prefs.getString("jwt", null) ?: return NewsResult.Unauthorized()
             val response = newsApi.getNews(
+                searchPattern = searchPattern,
                 token = "Bearer $token",
                 newsCategory = newsCategory,
                 sortType = sortType
@@ -73,10 +78,12 @@ class NewsRepositoryImpl @Inject constructor(
         return try {
             val token = prefs.getString("jwt", null) ?: return NewsResult.Unauthorized()
             val response = newsApi.authenticate("Bearer $token")
+            Log.println(Log.DEBUG, "AUTH", response.role)
             NewsResult.Success(
-                WrappedResponse(stringResponse = response)
+                WrappedResponse(stringResponse = response.role)
             )
         } catch (e: HttpException) {
+            Log.println(Log.DEBUG, "AUTH", e.code().toString())
             if (e.code() == 401) {
                 NewsResult.Unauthorized()
             } else if (e.code() == 409) {
@@ -86,6 +93,7 @@ class NewsRepositoryImpl @Inject constructor(
                 NewsResult.UnknownError()
             }
         } catch (e: Exception) {
+            Log.println(Log.DEBUG, "AUTH", e.toString())
             NewsResult.UnknownError()
         }
     }
@@ -198,6 +206,22 @@ class NewsRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             NewsResult.UnknownError()
         }
+    }
+
+    override suspend fun addNewsToSaved(request: SavedNewsRequest) {
+        val token = prefs.getString("jwt", null)
+        savedNewsApi.addNewsToSaved(
+            "Bearer $token",
+            request
+        )
+    }
+
+    override suspend fun deleteFromSaved(newsId: String) {
+        val token = prefs.getString("jwt", null)
+        savedNewsApi.deleteFromSaved(
+            "Bearer $token",
+            newsId
+        )
     }
 
 }

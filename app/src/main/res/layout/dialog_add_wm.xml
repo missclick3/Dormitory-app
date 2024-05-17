@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAddWmTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выберите номер стиральной машины"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAddWmInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Номер: "
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAddWmTitle"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/wmNumberPicker"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tvAddWmInfo"
+            app:layout_constraintTop_toTopOf="@id/tvAddWmInfo"
+            app:layout_constraintBottom_toBottomOf="@id/tvAddWmInfo"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:maxLines="1"
+            android:hint="введите число"/>
+
+        <Button
+            android:id="@+id/btnCloseDialog"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="назад"
+            android:backgroundTint="@color/gray"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnAdminAddWM"
+            app:layout_constraintTop_toBottomOf="@id/tvAddWmInfo"
+            android:layout_marginEnd="5dp"
+            app:cornerRadius="30dp"/>
+
+        <Button
+            android:id="@+id/btnAdminAddWM"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toEndOf="@id/btnCloseDialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="добавить"
+            app:layout_constraintTop_toBottomOf="@id/tvAddWmInfo"
+            android:layout_marginStart="5dp"
+            app:cornerRadius="30dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

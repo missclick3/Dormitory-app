@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_marginTop="8dp">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/newsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageButton
+            android:id="@+id/btnToSaveNews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/outline_bookmark_border_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
+            android:padding="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNewsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Заголовок новости"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvNewsContent"
+            android:paddingHorizontal="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:paddingBottom="8dp"
+            />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNewsContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            android:ellipsize="end"
+            android:textSize="15sp"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingHorizontal="12dp"
+            />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvShowMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="Показать ещё"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tvNewsContent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="12dp"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:maxHeight="400dp"
+            android:layout_centerInParent="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvShowMore"
+            app:layout_constraintBottom_toTopOf="@id/filesLL"/>
+
+        <LinearLayout
+            android:id="@+id/slideDotLL"
+            android:layout_marginTop="-16dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPager2"/>
+
+        <LinearLayout
+            android:id="@+id/filesLL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPager2"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidlineForAdminActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            />
+        
+        <View
+            android:id="@+id/greyLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#edeef0"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnDeleteNews"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteNews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Удалить"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/filesLL"
+            app:layout_constraintStart_toStartOf="@id/guidlineForAdminActions"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:layout_margin="8dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChangeNews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Изменить"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/filesLL"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidlineForAdminActions"
+            android:backgroundTint="@android:color/darker_gray"
+            android:layout_margin="8dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

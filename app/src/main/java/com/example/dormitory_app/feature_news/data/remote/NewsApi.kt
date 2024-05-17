@@ -1,12 +1,14 @@
 package com.example.dormitory_app.feature_news.data.remote
 
-import com.example.dormitory_app.feature_news.data.messages.dtos.NewsDto
-import com.example.dormitory_app.feature_news.data.messages.requests.CreateNewsRequest
-import com.example.dormitory_app.feature_news.data.messages.requests.UpdateNewsRequest
-import com.example.dormitory_app.feature_news.data.messages.responses.GetNewsResponse
-import com.example.dormitory_app.feature_news.data.messages.responses.GetSavedNewsResponse
-import com.example.dormitory_app.feature_news.data.messages.util.NewsCategory
-import com.example.dormitory_app.feature_news.data.messages.util.SortType
+import com.example.dormitory_app.feature_news.messages.dtos.NewsDto
+import com.example.dormitory_app.feature_news.messages.requests.CreateNewsRequest
+import com.example.dormitory_app.feature_news.messages.requests.UpdateNewsRequest
+import com.example.dormitory_app.feature_news.messages.responses.AuthResponse
+import com.example.dormitory_app.feature_news.messages.responses.GetNewsResponse
+import com.example.dormitory_app.feature_news.messages.responses.GetSavedNewsResponse
+import com.example.dormitory_app.feature_news.messages.util.NewsCategory
+import com.example.dormitory_app.feature_news.messages.util.SortType
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -34,7 +36,7 @@ interface NewsApi {
     @GET("/ping-user-app")
     suspend fun authenticate(
         @Header("Authorization") token: String
-    ) : String
+    ) : AuthResponse
 
     @PUT("admin/news/{news_id}")
     suspend fun putNews(

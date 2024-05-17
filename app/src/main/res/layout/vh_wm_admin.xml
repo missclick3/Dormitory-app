@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="30dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAdminWmInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Стиральная машина № "
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAdminWmNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/tvAdminWmInfo"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvWmAdminStatusInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Статус: "
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAdminWmInfo"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvWmAdminStatusValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="активна"
+            android:textSize="16sp"
+            android:textColor="@android:color/holo_green_light"
+            app:layout_constraintStart_toEndOf="@id/tvWmAdminStatusInfo"
+            app:layout_constraintTop_toTopOf="@id/tvWmAdminStatusInfo"/>
+
+        <Button
+            android:id="@+id/btnChangeWmStatus"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="изменить статус"
+            android:layout_marginTop="10dp"
+            app:cornerRadius="30dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/btnDeleteWm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWmAdminStatusInfo" />
+
+        <Button
+            android:id="@+id/btnDeleteWm"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="удалить"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            app:cornerRadius="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWmAdminStatusInfo"
+            app:layout_constraintEnd_toStartOf="@id/btnChangeWmStatus"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

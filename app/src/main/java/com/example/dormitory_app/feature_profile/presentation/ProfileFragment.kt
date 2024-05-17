@@ -1,38 +1,28 @@
 package com.example.dormitory_app.feature_profile.presentation
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
-import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.ui.graphics.Color
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.dormitory_app.R
 import com.example.dormitory_app.databinding.FragmentProfileBinding
-import com.example.dormitory_app.feature_login.domain.AuthResult
-import com.example.dormitory_app.feature_login.presentation.AuthUIEvent
-import com.example.dormitory_app.feature_login.presentation.LoginActivity
 import com.example.dormitory_app.feature_profile.data.messages.dtos.CertificateDTO
 import com.example.dormitory_app.feature_profile.data.messages.dtos.UserDTO
 import com.example.dormitory_app.feature_profile.data.messages.responses.UserInfoResponse
 import com.example.dormitory_app.feature_profile.domain.ProfileResult
-import com.example.dormitory_app.main.MainActivity
+import com.example.dormitory_app.main.FragmentListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,15 +35,15 @@ import kotlin.math.abs
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val viewModel: ProfileViewModel by viewModels()
-    private lateinit var listener: ProfileFragmentListener
+    private lateinit var listener: FragmentListener
     private lateinit var binding: FragmentProfileBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is ProfileFragmentListener) {
+        if (context is FragmentListener) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement ProfileFragmentListener")
+            throw RuntimeException("$context must implement FragmentListener")
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -152,7 +142,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.editTg.setImageResource(R.drawable.baseline_check_24)
                 binding.tvTgInfo.isEnabled = true
                 binding.tvTgInfo.requestFocus()
-                binding.tvTgInfo.setSelection(binding.tvTgInfo.text.length)
+                binding.tvTgInfo.text?.length?.let { it1 -> binding.tvTgInfo.setSelection(it1) }
                 WindowCompat.getInsetsController(requireActivity().window, binding.tvTgInfo).show(WindowInsetsCompat.Type.ime())
             }
             else {
@@ -174,7 +164,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.editPhoneNumber.setImageResource(R.drawable.baseline_check_24)
                 binding.tvPhoneNumberInfo.isEnabled = true
                 binding.tvPhoneNumberInfo.requestFocus()
-                binding.tvPhoneNumberInfo.setSelection(binding.tvPhoneNumberInfo.text.length)
+                binding.tvPhoneNumberInfo.text?.let { it1 ->
+                    binding.tvPhoneNumberInfo.setSelection(
+                        it1.length)
+                }
                 WindowCompat.getInsetsController(requireActivity().window, binding.tvPhoneNumberInfo).show(WindowInsetsCompat.Type.ime())
             }
             else {
@@ -196,7 +189,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.editEmail.setImageResource(R.drawable.baseline_check_24)
                 binding.tvEmailInfo.isEnabled = true
                 binding.tvEmailInfo.requestFocus()
-                binding.tvEmailInfo.setSelection(binding.tvEmailInfo.text.length)
+                binding.tvEmailInfo.text?.let { it1 -> binding.tvEmailInfo.setSelection(it1.length) }
                 WindowCompat.getInsetsController(requireActivity().window, binding.tvEmailInfo).show(WindowInsetsCompat.Type.ime())
             }
             else {

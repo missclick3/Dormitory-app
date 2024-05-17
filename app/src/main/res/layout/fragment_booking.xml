@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bookingTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Бронирование стиральных машин"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/btnGoToMyBookings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Мои брони"
+        android:textSize="11sp"
+        app:cornerRadius="30dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/cvDatePick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cvDatePick" />
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="10dp"
+        android:id="@+id/cvDatePick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/bookingTitle"
+        app:layout_constraintTop_toBottomOf="@id/bookingTitle"
+        android:backgroundTint="@color/blue"
+        app:cardCornerRadius="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/todayButton"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/white"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="сегодня"
+                android:textColor="@color/blue"
+                android:textSize="11sp"
+                app:cornerRadius="30dp"
+                android:elevation="0dp"/>
+            <Button
+                android:id="@+id/tomorrowButton"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="завтра"
+                android:textSize="11sp"
+                app:cornerRadius="30dp"
+                android:elevation="0dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:layout_marginStart="12dp"
+        android:id="@+id/flBooking"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvDatePick"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/adminBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:src="@drawable/crown_2_svgrepo_com"
+        android:contentDescription="Admin" />
+</androidx.constraintlayout.widget.ConstraintLayout>

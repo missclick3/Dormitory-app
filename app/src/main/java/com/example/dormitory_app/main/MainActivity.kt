@@ -2,19 +2,18 @@ package com.example.dormitory_app.main
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import com.example.dormitory_app.R
 import com.example.dormitory_app.databinding.ActivityMainBinding
+import com.example.dormitory_app.feature_booking_wm.ui.FragmentBooking
 import com.example.dormitory_app.feature_login.presentation.LoginActivity
+import com.example.dormitory_app.feature_news.presentation.NewsFragment
 import com.example.dormitory_app.feature_profile.presentation.ProfileFragment
-import com.example.dormitory_app.feature_profile.presentation.ProfileFragmentListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), ProfileFragmentListener {
+class MainActivity : AppCompatActivity(), FragmentListener {
 
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +26,8 @@ class MainActivity : AppCompatActivity(), ProfileFragmentListener {
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.person -> replaceFragment(ProfileFragment())
-                R.id.news -> replaceFragment(ProfileFragment()) // Предположим, у вас есть фрагмент для новостей
+                R.id.news -> replaceFragment(NewsFragment()) // Предположим, у вас есть фрагмент для новостей
+                R.id.bookingWM -> replaceFragment(FragmentBooking())
                 else -> {
                     // Handle other cases if necessary
                 }
@@ -35,12 +35,12 @@ class MainActivity : AppCompatActivity(), ProfileFragmentListener {
             true
         }
 
-        // По умолчанию открываем первый элемент
         binding.bottomNavigationView.selectedItemId = R.id.person
     }
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frame_layout, fragment)
+            .addToBackStack(null)
             .commit()
     }
 
